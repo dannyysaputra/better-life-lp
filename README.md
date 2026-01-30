@@ -1,51 +1,69 @@
 # BetterLife MVP
 
-A professional, elegant, and responsive landing page for BetterLife, built with Next.js (App Router) and Tailwind CSS. This project serves as the Minimum Viable Product (MVP) to validate demand and capture leads.
+A professional, elegant, and responsive marketing foundation for BetterLife, built with Next.js (App Router) and Tailwind CSS. This project serves as the Minimum Viable Product (MVP) to validate demand through a focused landing page and secure lead capture system.
 
-## Features
+## 🔗 Live Demo
+Production URL: [https://betterlife-landingpage.netlify.app/](https://betterlife-landingpage.netlify.app/)
 
-- **Premium UI:** Warm-neutral design with terracotta/teal/saffron accents.
-- **Responsive:** Optimized for Mobile (360px), Tablet, and Desktop.
-- **Motion:** Subtle reveal animations and smooth scrolling (respects `prefers-reduced-motion`).
-- **Lead Capture:** Validated form with anti-spam (honeypot + rate limiting).
-- **SEO Ready:** Sitemap, robots.txt, JSON-LD, and Open Graph metadata configured.
-- **Backend:** Server-side validation and persistence to Supabase.
+### Available Routes
+- **`/` (Landing Page)**: Main conversion funnel with hero, benefits, and contact form.
+- **`/about`**: The BetterLife mission and editorial story.
+- **`/faq`**: Support center with searchable common questions.
+- **`/privacy`**: Privacy policy and data handling details.
+- **`/terms`**: Terms of service and usage guidelines.
 
-## Tech Stack
+*Note: The **"Request Info"** CTA button used across all pages automatically navigates to the landing page and smooth-scrolls to the `#contact` section, focusing the first input field for immediate use.*
 
-- **Framework:** Next.js 15+ (App Router)
-- **Styling:** Tailwind CSS v4
-- **Motion:** Framer Motion
-- **Icons:** Lucide React
-- **Validation:** Zod + React Hook Form
-- **Backend:** Supabase (PostgreSQL)
+## 🛠 Tech Stack
+- **Framework**: Next.js 15+ (App Router)
+- **Library**: React 19
+- **Styling**: Tailwind CSS v4 (Token-based design system)
+- **Motion**: Framer Motion (Reduced-motion aware)
+- **Validation**: Zod + React Hook Form
+- **Database**: Supabase (PostgreSQL)
+- **Icons**: Lucide React
 
-## Getting Started
+## ✨ Features
+- **Contextual Navigation**: Navbar adapts based on the current route (anchor links on Home, page links on others).
+- **Premium UI**: Warm-neutral aesthetic with terracotta, teal, and saffron accents.
+- **Responsive Design**: Fluid layouts optimized for 360px (Mobile), 768px (Tablet), and 1280px+ (Desktop).
+- **Secure Lead Capture**: 
+  - Server-side validation and sanitization.
+  - Anti-spam measures including a hidden honeypot and rate limiting.
+  - Persistence to Supabase via server-only service role keys.
+- **Enhanced Static Pages**: Each page features a unique layout concept (Editorial, Support Center, Policy Matrix, Legal Summary) and background motifs.
+- **SEO Ready**: Unique metadata per route, Open Graph tags, dynamic `sitemap.xml`, and `robots.txt`.
 
-### 1. Clone the repository
-```bash
-git clone <repository-url>
-cd BetterLife
-```
+## 🚀 Getting Started (Local)
 
-### 2. Install dependencies
+### 1. Install dependencies
 ```bash
 npm install
 ```
 
-### 3. Setup Environment Variables
+### 2. Setup Environment Variables
 Copy the example environment file:
 ```bash
 cp .env.example .env.local
 ```
+*Note: `.env.local` is ignored by Git and should be used for your local secrets.*
 
-Open `.env.local` and fill in your values:
-- **SUPABASE_URL**: Your Supabase project URL.
-- **SUPABASE_SERVICE_ROLE_KEY**: Your Supabase `service_role` secret (NOT the `anon` key).
-- **NEXT_PUBLIC_SITE_URL**: `http://localhost:3000` for local dev.
+### 3. Run Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000).
 
-### 4. Setup Database (Supabase)
-Run the following SQL in your Supabase SQL Editor to create the required table:
+## 🔑 Environment Variables
+| Variable | Scope | Description |
+| :--- | :--- | :--- |
+| `SUPABASE_URL` | Server | Your Supabase project URL. |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server-only | Secret key for database access (Never expose to browser). |
+| `NEXT_PUBLIC_SITE_URL` | Public | The base URL of your deployment (e.g., `https://betterlife-landingpage.netlify.app`). |
+| `NEXT_PUBLIC_ANALYTICS_ENABLED` | Public | Optional toggle ('true'/'false') for analytics scripts. |
+
+## 🗄 Supabase Setup
+Run the following SQL in your Supabase SQL Editor to create the `leads` table:
 
 ```sql
 create table public.leads (
@@ -59,47 +77,28 @@ create table public.leads (
   user_agent text,
   ip_hash text
 );
-
--- Optional: Enable RLS to prevent public access (API uses service role to bypass)
-alter table public.leads enable row level security;
 ```
 
-### 5. Run Development Server
-```bash
-npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000).
+## 🌐 Deployment (Netlify)
+This project is optimized for deployment on **Netlify**.
 
-## Manual Acceptance Testing
+1. **Connect**: Link your GitHub/GitLab repository to Netlify.
+2. **Build Settings**:
+   - Build Command: `npm run build`
+   - Publish Directory: `.next`
+3. **Environment Variables**: Add the variables listed in the [Environment Variables](#-environment-variables) section in the Netlify dashboard.
+4. **Post-Deploy Verification**:
+   - Open all routes to ensure they load correctly.
+   - Submit a test lead via the form.
+   - Verify the row appears in the Supabase Table Editor.
 
-To verify the project meets the MVP requirements, refer to the [Acceptance Tests](.spec/acceptance-tests.md) document.
+## ✅ Acceptance Checklist
+- [x] All routes (`/`, `/about`, `/faq`, `/privacy`, `/terms`) render successfully.
+- [x] Contextual Navbar and Footer links work across all pages.
+- [x] "Request Info" CTA correctly scrolls and focuses the form input.
+- [x] Form submission displays success/error states accurately.
+- [x] Robots.txt and Sitemap.xml are accessible.
+- [x] Mobile menu is usable and handles overflow correctly.
 
-**Quick Checks:**
-1.  **Routes:** Verify `/`, `/about`, `/faq`, `/privacy`, `/terms` load.
-2.  **Navigation:** Click "Request Info" -> should smooth scroll to the form.
-3.  **Form:** Submit a valid entry -> check for success message ("Thanks — we got your request").
-4.  **Database:** Verify the row appears in your Supabase `leads` table.
-5.  **Mobile:** Open DevTools (F12), toggle device toolbar, test on 360px width.
-
-## Deployment (Vercel)
-
-1.  **Push to Git:** Ensure your code is pushed to GitHub/GitLab.
-2.  **Import to Vercel:** Create a new project and import your repository.
-3.  **Configure Environment Variables:**
-    - Go to **Settings > Environment Variables**.
-    - Add `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and `NEXT_PUBLIC_SITE_URL` (set to your production domain, e.g., `https://betterlife.vercel.app`).
-4.  **Deploy:** Click "Deploy".
-
-## Troubleshooting
-
--   **"Database insertion failed" / 500 Error:**
-    -   Check if `SUPABASE_SERVICE_ROLE_KEY` is correct in `.env.local` or Vercel.
-    -   Ensure the `leads` table exists in Supabase.
--   **Form doesn't scroll/focus:**
-    -   Ensure the DOM ID `#contact` exists (it is in `FinalCTASection`).
--   **Build Errors:**
-    -   Ensure no type errors (`npm run build` locally to test).
-
-## License
-
-All rights reserved © 2026 BetterLife.
+## 📄 License
+All rights reserved © 2026 Danny Suggi Saputra.
