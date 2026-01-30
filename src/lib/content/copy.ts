@@ -135,16 +135,18 @@ export const copy = {
     },
     privacy: {
       title: "Privacy",
+      description: "How BetterLife collects and uses your information when you submit a request.",
       bullets: [
         "We collect only the information you submit through the request form (such as name, contact, and message).",
         "We use this information only to respond to your request and follow up if needed.",
         "We do not sell your personal data.",
         "You can request deletion of your data by contacting us.",
       ],
-      contact: "For privacy requests, contact us via the request form or email at privacy@example.com.", // placeholder as requested
+      contact: "For privacy requests, contact us via the request form or email at privacy@example.com.",
     },
     terms: {
       title: "Terms",
+      description: "Terms for using the BetterLife website and submitting a request.",
       bullets: [
         "This website is provided for informational purposes.",
         "Submitting a request does not create a contract or guarantee of service.",
