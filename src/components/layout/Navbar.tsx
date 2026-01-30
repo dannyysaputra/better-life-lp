@@ -29,7 +29,7 @@ export function Navbar() {
         { label: "Terms", href: "/terms" },
       ];
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLElement>, href: string) => {
+  const handleLinkClick = (e: React.MouseEvent<Element>, href: string) => {
     // If it's a section link (starts with /#)
     if (href.startsWith("/#")) {
       setMobileOpen(false);
