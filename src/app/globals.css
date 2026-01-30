@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-ink: rgb(var(--ink));
+  --color-slate: rgb(var(--slate));
+  --color-muted: rgb(var(--muted));
+  --color-mist: rgb(var(--mist));
+  --color-pearl: rgb(var(--bg));
+  --color-bg: rgb(var(--bg));
+  --color-card: rgb(var(--surface));
+  --color-surface: rgb(var(--surface));
+  --color-border: rgb(var(--border));
+
+  --color-terracotta: rgb(var(--accent-primary));
+  --color-teal: rgb(var(--accent-secondary));
+  --color-saffron: rgb(var(--accent-highlight));
+
+  --color-success: rgb(var(--success));
+  --color-warning: rgb(var(--warning));
+  --color-danger: rgb(var(--danger));
+  --color-error: rgb(var(--danger));
+
+  --color-glass: rgb(var(--glass) / var(--glass-alpha));
+  
+  /* Shadows */
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+
+  /* Radii */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  /* Animation */
+  --animate-reveal: reveal var(--dur-med) var(--ease-out) forwards;
+
+  /* Fonts */
+  --font-sans: var(--font-manrope);
+  --font-serif: var(--font-fraunces);
+}
+
+/* Custom Utilities / Keyframes */
+@layer utilities {
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+:root {
+  /* Base */
+  --bg: 250 248 245;        /* pearl */
+  --surface: 255 255 255;   /* card */
+  --ink: 20 19 24;
+  --slate: 74 74 87;
+  --muted: 110 110 123;
+  --border: 230 227 234;    /* mist */
+  --mist: 230 227 234;      /* Explicit mist var */
+
+  /* Accents */
+  --accent-primary: 208 99 76;    /* terracotta */
+  --accent-secondary: 30 127 122; /* teal */
+  --accent-highlight: 217 164 65; /* saffron */
+
+  /* Feedback */
+  --success: 30 127 122;
+  --warning: 217 164 65;
+  --danger: 181 68 58;
+
+  /* Overlays */
+  --glass: 250 248 245;
+  --glass-alpha: 0.70;
+  --glassBorder: rgba(230, 227, 234, 0.65);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(20, 19, 24, 0.06);
+  --shadow-md: 0 6px 18px rgba(20, 19, 24, 0.10);
+  --shadow-lg: 0 14px 40px rgba(20, 19, 24, 0.12);
+
+  /* Radii */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 150ms;
+  --dur-med: 250ms;
+  --dur-slow: 400ms;
+}
+
+/* Dark theme */
+.dark {
+  --bg: 15 15 18;
+  --surface: 22 22 27;
+  --ink: 242 240 246;
+  --slate: 201 198 208;
+  --muted: 160 156 170;
+  --border: 42 42 51;
+  --mist: 42 42 51;
+
+  --accent-primary: 212 111 89;
+  --accent-secondary: 42 154 147;
+  --accent-highlight: 224 177 86;
+
+  --success: 42 154 147;
+  --warning: 224 177 86;
+  --danger: 196 86 72;
+}
+
+body {
+    background-color: rgb(var(--bg));
+    color: rgb(var(--ink));
+}
